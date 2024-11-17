@@ -1,5 +1,6 @@
 {
   "name": "prokarimi-blog",
+  "homepage": "https://robertsovar.github.io/prokarimi-blog/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
