@@ -52,7 +52,7 @@
   .headerList {
     display: flex;
     gap: 15px;
-    font-size: 14px;
+    font-size: 18px;
     width: 300px;
     list-style: none;
   }
