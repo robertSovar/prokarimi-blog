@@ -3,4 +3,20 @@
 
 body {
   font-family: "Roboto", sans-serif;
+  background-color: rgb(255, 255, 255);
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+}
+
+.navLink {
+  text-decoration: none;
+  color: white;
+}
+
+.active {
+  color: rgb(129, 68, 6);
+  text-decoration: none;
 }
