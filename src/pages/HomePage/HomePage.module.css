@@ -1,5 +1,39 @@
-.container {
+.homeContainer {
   width: 100%;
-  padding: 80px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   height: 100vh;
+  padding: 120px 15px;
+}
+
+.articleContainer {
+  border-radius: 15px;
+  background-color: #f9f9f9be;
+  box-shadow: #ee7777be 0px 5px 15px;
+  width: 100%;
+  height: 95%;
+  overflow-y: scroll;
+}
+
+.articleList {
+  list-style-type: none;
+  padding: 15px;
+}
+
+.articleItemsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.author {
+  display: flex;
+  justify-content: right;
+}
+
+.noArticles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
