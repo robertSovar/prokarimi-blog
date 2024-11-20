@@ -1,7 +1,16 @@
+import { NavLink, Link } from "react-router-dom";
+import { useAuth } from "../../utils/AuthContext/AuthContext";
 import Hamburger from "hamburger-react";
 import styles from "./Header.module.css";
-import { NavLink, Link } from "react-router-dom";
+import Button from "../../utils/Button/Button";
+import { useNavigate } from "react-router-dom";
+
 function Header() {
+  const { user, logout } = useAuth();
+  const username = JSON.parse(localStorage.getItem("Username"));
+  const role = JSON.parse(localStorage.getItem("Role"));
+  const navigate = useNavigate();
+
   return (
     <header className={styles.headerSection}>
       <div className={styles.headerContainer}>
@@ -18,31 +27,55 @@ function Header() {
         </div>
 
         <ul className={styles.headerList}>
-          <li>
-            {" "}
-            <NavLink
-              to="/"
-              className={({ isActive }) => (isActive ? "active" : "navLink")}
-            >
-              Home
-            </NavLink>
-          </li>{" "}
-          <li>
-            <NavLink
-              to="/login"
-              className={({ isActive }) => (isActive ? "active" : "navLink")}
-            >
-              Login
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/register"
-              className={({ isActive }) => (isActive ? "active" : "navLink")}
-            >
-              Register
-            </NavLink>
-          </li>
+          {user.isAuthenticated ? (
+            <>
+              <li>
+                <span className={styles.headerWelcome}>
+                  Welcome {username} with role:{role}
+                </span>
+              </li>
+              <li>
+                <Button
+                  label="Logout"
+                  onClick={logout}
+                  onChange={navigate("/login")}
+                />
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? "active" : "navLink"
+                  }
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) =>
+                    isActive ? "active" : "navLink"
+                  }
+                >
+                  Login
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/register"
+                  className={({ isActive }) =>
+                    isActive ? "active" : "navLink"
+                  }
+                >
+                  Register
+                </NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </header>

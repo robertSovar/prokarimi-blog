@@ -2,7 +2,8 @@ import { API } from "./api";
 
 export const registerUser = async (data) => {
   try {
-    const response = await API.post("/register", data);
+    const response = await API.post("/auth/signup", data);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log("Error registering user", error);
@@ -12,7 +13,7 @@ export const registerUser = async (data) => {
 
 export const loginUser = async (data) => {
   try {
-    const response = await API.post("/login", data);
+    const response = await API.post("/auth/login", data);
     const token = response.data.token;
     localStorage.setItem("token", token);
     return response.data;
@@ -24,7 +25,7 @@ export const loginUser = async (data) => {
 
 export const getUserProfile = async () => {
   try {
-    const response = await API.get("/user", {
+    const response = await API.get("/auth/user", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },

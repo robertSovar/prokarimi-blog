@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./HomePage.module.css";
 import { getArticles } from "../../api/articleApi";
 import { Hourglass } from "react-loader-spinner";
+import Button from "../../utils/Button/Button";
 
 function HomePage() {
   const [articles, setArticles] = useState([]);
@@ -28,7 +29,9 @@ function HomePage() {
         <h1 className={styles.titlePage}> Welcome to Prokarimi Blog</h1>
         <div className={styles.articleContainer}>
           {loading && <Hourglass visible={true} height="80" width="80" />}
-          {!loading && articles.length === 0 && <p className={styles.noArticles}>No articles found.</p>}
+          {!loading && articles.length === 0 && (
+            <p className={styles.noArticles}>No articles found.</p>
+          )}
           <ul className={styles.articleList}>
             {articles.map((article) => (
               <li key={article._id} className={styles.articleItemsContainer}>
@@ -36,6 +39,21 @@ function HomePage() {
                 <p>{article.description}</p>
                 <p>{article.content}</p>
                 <p className={styles.author}>{article.author}</p>
+                <label htmlFor="comment">
+                  <form action="comment" className={styles.commentForm}>
+                    <input
+                      type="textarea"
+                      id="comment"
+                      placeholder="Leave a comment"
+                      className={styles.commentInput}
+                    />
+                    <Button
+                      label="Add comment"
+                      type="submit"
+                      className={styles.commentButton}
+                    />
+                  </form>
+                </label>
               </li>
             ))}
           </ul>
