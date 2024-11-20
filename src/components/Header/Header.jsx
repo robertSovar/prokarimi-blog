@@ -37,8 +37,10 @@ function Header() {
               <li>
                 <Button
                   label="Logout"
-                  onClick={logout}
-                  onChange={navigate("/login")}
+                  onClick={() => {
+                    logout();
+                    navigate("/login");
+                  }}
                 />
               </li>
             </>

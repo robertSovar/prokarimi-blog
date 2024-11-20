@@ -5,6 +5,7 @@ import Button from "../../utils/Button/Button";
 import { Link } from "react-router-dom";
 import { registerUser } from "../../api/userApi";
 import { useAuth } from "../../utils/AuthContext/AuthContext";
+import { Hourglass } from "react-loader-spinner";
 
 function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -14,6 +15,7 @@ function RegisterPage() {
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -29,6 +31,7 @@ function RegisterPage() {
     e.preventDefault();
     setError("");
     setSuccess(false);
+    setIsLoading(true);
 
     try {
       const data = await registerUser(formData);
@@ -45,12 +48,15 @@ function RegisterPage() {
       }
     } catch (error) {
       setError(error.message || "Registration failed");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.labelFormContainer}>
+        {isLoading && <Hourglass visible={true} height="80" width="80" />}
         <h1 className={styles.labelFormTitle}>Register</h1>
         <label htmlFor="register" className={styles.labelForm}>
           <input
